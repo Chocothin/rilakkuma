@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Korilakkuma World</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="loading-screen">
+    <div class="loading-content">
+      <div class="loading-character">🐻</div>
+      <div class="loading-title">Korilakkuma World</div>
+      <div class="loading-bar-container">
+        <div class="loading-bar" id="loading-bar"></div>
+      </div>
+      <div class="loading-text" id="loading-text">Loading...</div>
+    </div>
+  </div>
+  <canvas id="game-canvas"></canvas>
+  <div id="ui-overlay">
+    <div id="crosshair">+</div>
+    <div id="instructions">Click to play — WASD Move / Shift Run / Space Jump / Mouse Look / E Interact</div>
+    <div id="touch-controls"></div>
+  </div>
+  <div id="fade-overlay"></div>
+  <div id="interaction-prompt">Press E to enter</div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

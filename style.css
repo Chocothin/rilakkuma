@@ -1,0 +1,320 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #FFF5E6 0%, #F5E6D0 50%, #E8D5B8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: opacity 0.6s ease-out;
+}
+
+#loading-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#loading-screen.hidden {
+  display: none;
+}
+
+.loading-content {
+  text-align: center;
+}
+
+.loading-character {
+  font-size: 64px;
+  animation: bounce 1.2s ease-in-out infinite;
+}
+
+.loading-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #8B6F5E;
+  margin: 16px 0 24px;
+  letter-spacing: 2px;
+}
+
+.loading-bar-container {
+  width: 240px;
+  height: 8px;
+  background: rgba(139, 111, 94, 0.2);
+  border-radius: 4px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.loading-bar {
+  width: 0%;
+  height: 100%;
+  background: #E53935;
+  border-radius: 4px;
+  transition: width 0.2s ease;
+}
+
+.loading-text {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #A08878;
+  margin-top: 12px;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+#game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#ui-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 24px;
+  font-family: monospace;
+  display: none;
+}
+
+#crosshair.active {
+  display: block;
+}
+
+#instructions {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: opacity 0.5s;
+}
+
+#instructions.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#touch-controls {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.touch-device #touch-controls {
+  display: block;
+}
+
+.joystick-area {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.joystick-knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+
+.touch-btn {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  z-index: 25;
+}
+
+.touch-btn:active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.touch-btn-jump {
+  right: 30px;
+  bottom: 110px;
+}
+
+.touch-btn-sprint {
+  right: 30px;
+  bottom: 30px;
+}
+
+.touch-btn-interact {
+  right: 100px;
+  bottom: 110px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.camera-touch-zone {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  pointer-events: auto;
+  touch-action: none;
+  z-index: 1;
+}
+
+.touch-device #instructions {
+  display: none;
+}
+
+.touch-device #crosshair {
+  display: none !important;
+}
+
+#fade-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: black;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 1000;
+}
+
+#fade-overlay.active {
+  opacity: 1;
+}
+
+#interaction-prompt {
+  position: fixed;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 20px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 50;
+  pointer-events: none;
+}
+
+#interaction-prompt.visible {
+  opacity: 1;
+}
+
+#interaction-prompt.blink {
+  animation: promptBlink 1s ease-in-out infinite;
+}
+
+@keyframes promptBlink {
+  0%, 100% { opacity: 1; background: rgba(0, 0, 0, 0.6); }
+  50% { opacity: 1; background: rgba(255, 183, 77, 0.85); color: #5D4037; }
+}
+
+#interaction-toast {
+  position: fixed;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  color: #5D4037;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  background: rgba(255, 248, 240, 0.95);
+  border: 2px solid #E8D5B7;
+  padding: 12px 24px;
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 55;
+  pointer-events: none;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.3px;
+}
+
+#interaction-toast::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #E8D5B7;
+}
+
+#interaction-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
