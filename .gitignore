@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# IDE
+.idea/
+
+# AI dev tool artifacts
+.sisyphus/
+
+# Test output
+test-results/
+
+# Development screenshots
+*.png
+
+# OS
+.DS_Store
+Thumbs.db
